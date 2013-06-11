@@ -2,6 +2,9 @@
 #include <tf/transform_broadcaster.h>
 #include <sensor_msgs/Imu.h>
 
+#include <tf/LinearMath/Matrix3x3.h>
+
+
 void poseCallback(const sensor_msgs::ImuConstPtr& msg){
   static tf::TransformBroadcaster br;
   tf::Transform transform;
@@ -10,7 +13,7 @@ void poseCallback(const sensor_msgs::ImuConstPtr& msg){
   tf::quaternionMsgToTF(msg->orientation, angles);
       
   double roll, pitch, yaw;
-  btMatrix3x3(angles).getRPY(roll, pitch,yaw);
+  tf::Matrix3x3(angles).getRPY(roll, pitch,yaw);
 
   transform.setOrigin( tf::Vector3(0.0,0.0,0.0));
   //  transform.setRotation( tf::createQuaternionFromRPY(roll, pitch, 0.0) );

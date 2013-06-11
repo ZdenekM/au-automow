@@ -58,6 +58,9 @@
 
 #include "std_msgs/Bool.h"
 
+
+#include <tf/LinearMath/Matrix3x3.h>
+
 using namespace std;
 
 class ImuNode 
@@ -452,7 +455,7 @@ public:
     data.header.stamp = ros::Time().fromNSec(time);
     
     double roll,pitch,yaw;
-    btMatrix3x3(orientation[0], orientation[3], orientation[6],
+    tf::Matrix3x3(orientation[0], orientation[3], orientation[6],
 		orientation[1], orientation[4], orientation[7],
 		orientation[2], orientation[5], orientation[8]).getRPY(roll, pitch,yaw);
   
